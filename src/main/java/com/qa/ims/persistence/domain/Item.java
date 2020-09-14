@@ -6,12 +6,12 @@ public class Item {
 	private String itemName;
 	private double price;
 
-	public Item(String itemNamee, double price) {
+	public Item(String itemName, double price) {
 		this.setItemName(itemName);
 		this.setPrice(price);
 	}
 
-	public Item(Long id, String itemNamee, double price) {
+	public Item(Long id, String itemName, double price) {
 		this.setId(id);
 		this.setItemName(itemName);
 		this.setPrice(price);
