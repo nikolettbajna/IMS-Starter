@@ -16,12 +16,15 @@ public class IMS {
 	public static final Logger LOGGER = LogManager.getLogger();
 
 	private final CustomerController customers;
+	//private final ItemController items;
 	private final Utils utils;
 
 	public IMS() {
 		this.utils = new Utils();
 		final CustomerDAO custDAO = new CustomerDAO();
 		this.customers = new CustomerController(custDAO, utils);
+		//final ItemDAO itemDAO = new ItemDAO();
+		//this.items = new ItemController(itemDAO, utils);
 	}
 
 	public void imsSystem() {
