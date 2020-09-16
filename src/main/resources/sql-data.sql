@@ -3,5 +3,5 @@ INSERT INTO `ims`.`customers` (`first_name`, `surname`, `email`) VALUES ('jordan
 ('john', 'smith','js@gmail.com'),
 ('julie', 'hudson','jhudson@gmail.com');
 
-INSERT INTO `ims`.`items` (`item_name`, `price`) VALUES ('ball', 2.33),
-('teddy bear', 11.99);
+INSERT INTO `ims`.`items` (`item_name`, `category`, `price`) VALUES ('ball', 'equipment', 2.33),
+('teddy bear','toy', 11.99);
