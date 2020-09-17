@@ -22,7 +22,8 @@ public class CustomerDAO implements Dao<Customer> {
 		Long id = resultSet.getLong("id");
 		String firstName = resultSet.getString("first_name");
 		String surname = resultSet.getString("surname");
-		return new Customer(id, firstName, surname);
+		String email = resultSet.getString("email");
+		return new Customer(id, firstName, surname, email);
 	}
 
 	/**
@@ -59,6 +60,19 @@ public class CustomerDAO implements Dao<Customer> {
 		}
 		return null;
 	}
+	
+	public Customer find(Customer customer) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM customers ORDER BY id DESC LIMIT 1");) {
+			resultSet.next();
+			return modelFromResultSet(resultSet);
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
+		return null;
+	}
 
 	/**
 	 * Creates a customer in the database
@@ -69,8 +83,8 @@ public class CustomerDAO implements Dao<Customer> {
 	public Customer create(Customer customer) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("INSERT INTO customers(first_name, surname) values('" + customer.getFirstName()
-					+ "','" + customer.getSurname() + "')");
+			statement.executeUpdate("INSERT INTO customers(first_name, surname, email) values('" + customer.getFirstName()
+					+ "','" + customer.getSurname() + "','" + customer.getEmail() + "')");
 			return readLatest();
 		} catch (Exception e) {
 			LOGGER.debug(e);
@@ -104,7 +118,8 @@ public class CustomerDAO implements Dao<Customer> {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();) {
 			statement.executeUpdate("update customers set first_name ='" + customer.getFirstName() + "', surname ='"
-					+ customer.getSurname() + "' where id =" + customer.getId());
+					+ customer.getSurname() + "', email ='"
+							+ customer.getEmail() + "' where id =" + customer.getId());
 			return readCustomer(customer.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e);

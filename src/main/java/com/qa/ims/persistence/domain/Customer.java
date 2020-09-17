@@ -5,16 +5,19 @@ public class Customer {
 	private Long id;
 	private String firstName;
 	private String surname;
+	private String email;
 
-	public Customer(String firstName, String surname) {
+	public Customer(String firstName, String surname, String email) {
 		this.setFirstName(firstName);
 		this.setSurname(surname);
+		this.setEmail(email);
 	}
 
-	public Customer(Long id, String firstName, String surname) {
+	public Customer(Long id, String firstName, String surname, String email) {
 		this.setId(id);
 		this.setFirstName(firstName);
 		this.setSurname(surname);
+		this.setEmail(email);
 	}
 
 	public Long getId() {
@@ -40,10 +43,18 @@ public class Customer {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	@Override
 	public String toString() {
-		return "id:" + id + " first name:" + firstName + " surname:" + surname;
+		return "Customer ID:" + id + " Name:" + firstName + " " + surname + " E-mail: " + email;
 	}
 
 	@Override
@@ -53,6 +64,7 @@ public class Customer {
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		return result;
 	}
 
@@ -79,6 +91,11 @@ public class Customer {
 			if (other.surname != null)
 				return false;
 		} else if (!surname.equals(other.surname))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
 			return false;
 		return true;
 	}

@@ -4,17 +4,20 @@ public class Item {
 
 	private Long id;
 	private String itemName;
+	private String itemCategory;
 	private double price;
 
-	public Item(String itemNamee, double price) {
+	public Item(String itemName, String itemCategory, double price) {
 		this.setItemName(itemName);
 		this.setPrice(price);
+		this.setCategory(itemCategory);
 	}
 
-	public Item(Long id, String itemNamee, double price) {
+	public Item(Long id, String itemName, String itemCategory, double price) {
 		this.setId(id);
 		this.setItemName(itemName);
 		this.setPrice(price);
+		this.setCategory(itemCategory);
 	}
 
 	public Long getId() {
@@ -40,47 +43,64 @@ public class Item {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	
+	public String getCategory() {
+		return itemCategory;
+	}
+
+	public void setCategory(String itemCategory) {
+		this.itemCategory = itemCategory;
+	}
 
 	@Override
 	public String toString() {
-		return "id: " + id + " item name: " + itemName + " price: £" + price;
+		return "ID: " + id + " Item: " + itemName + " Category: " + itemCategory + " Price: £" + price;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		Double prc = new Double(price);
 		result = prime * result + ((itemName == null) ? 0 : itemName.hashCode());
+		result = prime * result + ((itemCategory == null) ? 0 : itemCategory.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		//result = prime * result + ((price == null) ? 0 : price.hashCode());
+		result = prime * result + ((prc == null) ? 0 : prc.hashCode());
 		return result;
 	}
 
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (this == obj)
-//			return true;
-//		if (obj == null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		Customer other = (Customer) obj;
-//		if (getItemName() == null) {
-//			if (other.getItemName() != null)
-//				return false;
-//		} else if (!getItemName().equals(other.getItemName()))
-//			return false;
-//		if (id == null) {
-//			if (other.id != null)
-//				return false;
-//		} else if (!id.equals(other.id))
-//			return false;
-//		if (price == null) {
-//			if (other.price != null)
-//				return false;
-//		} else if (!price.equals(other.price))
-//			return false;
-//		return true;
-//	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Item other = (Item) obj;
+		if (getItemName() == null) {
+			if (other.getItemName() != null)
+				return false;
+		} else if (!getItemName().equals(other.getItemName()))
+			return false;
+		if (getCategory() == null) {
+			if (other.getCategory() != null)
+				return false;
+		} else if (!getCategory().equals(other.getCategory()))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		String op =String.valueOf(other.price);
+		String p =String.valueOf(price);
+		if (p == null) {
+			if (op != null)
+				return false;
+		} else if (!p.equals(op))
+			return false;
+		return true;
+	}
 
 }
