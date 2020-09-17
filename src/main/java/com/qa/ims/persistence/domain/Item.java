@@ -93,10 +93,12 @@ public class Item {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (price == 0) {
-			if (other.price != 0)
+		String op =String.valueOf(other.price);
+		String p =String.valueOf(price);
+		if (p == null) {
+			if (op != null)
 				return false;
-		} else if (price !=other.price )
+		} else if (!p.equals(op))
 			return false;
 		return true;
 	}

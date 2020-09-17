@@ -14,7 +14,7 @@ import com.qa.ims.persistence.domain.Item;
 import com.qa.ims.utils.DBUtils;
 
 public class ItemDAO implements Dao<Item> {
-
+	
 	public static final Logger LOGGER = LogManager.getLogger();
 
 	@Override
@@ -46,6 +46,19 @@ public class ItemDAO implements Dao<Item> {
 			LOGGER.error(e.getMessage());
 		}
 		return new ArrayList<>();
+	}
+	
+	public Item find(Item item) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM Items ORDER BY id DESC LIMIT 1");) {
+			resultSet.next();
+			return modelFromResultSet(resultSet);
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
+		return null;
 	}
 
 	public Item readLatest() {

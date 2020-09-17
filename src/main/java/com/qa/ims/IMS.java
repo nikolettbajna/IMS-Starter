@@ -74,6 +74,8 @@ public class IMS {
 
 			if (action == Action.RETURN) {
 				changeDomain = true;
+			}else if (action == Action.BACK) {
+				doAction(active, action);
 			} else {
 				doAction(active, action);
 			}
@@ -88,6 +90,8 @@ public class IMS {
 		case READ:
 			crudController.readAll();
 			break;
+//		case FIND:		
+//			break;
 		case UPDATE:
 			crudController.update();
 			break;
@@ -99,6 +103,40 @@ public class IMS {
 		default:
 			break;
 		}
+	}
+	
+	public void findAction(CrudController<?> crudController, Action action) {
+		boolean changeAction = false;
+		do {
+
+			CrudController<?> active = null;
+			switch(action) {
+			case BYNAME:
+				System.out.println("By name");
+				break;
+			case BYID:
+				System.out.println("By id");
+				break;
+			case LAST:
+				System.out.println("last");
+				break;
+			case BACK:
+				break;
+			default:
+				break;
+			}
+
+			LOGGER.info("What would you like to do with " + action.name().toLowerCase() + ":");
+
+			Action.printActions();
+			Action a = Action.getAction(utils);
+
+			if (a == Action.BACK) {
+				changeAction = true;
+			} else {
+				doAction(active, a);
+			}
+		} while (!changeAction);
 	}
 
 }
