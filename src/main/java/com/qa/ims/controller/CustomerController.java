@@ -41,18 +41,18 @@ public class CustomerController implements CrudController<Customer> {
 	/**
 	 * Finds a Customer by taking in user input
 	 */
-	@Override
-	public Customer find() {
-		LOGGER.info("Please enter a first name");
-		String firstName = utils.getString();
-		LOGGER.info("Please enter a surname");
-		String surname = utils.getString();
-		LOGGER.info("Please enter the email address");
-		String email = utils.getString();
-		Customer customer = customerDAO.create(new Customer(firstName, surname, email));
-		LOGGER.info("Customer Created\nName: " + firstName + " " + surname + " E-mail: " + email);
-		return customer;
-	}
+//	@Override
+//	public Customer find() {
+//		LOGGER.info("Please enter a first name");
+//		String firstName = utils.getString();
+//		LOGGER.info("Please enter a surname");
+//		String surname = utils.getString();
+//		LOGGER.info("Please enter the email address");
+//		String email = utils.getString();
+//		Customer customer = customerDAO.create(new Customer(firstName, surname, email));
+//		LOGGER.info("Customer Created\nName: " + firstName + " " + surname + " E-mail: " + email);
+//		return customer;
+//	}
 
 	/**
 	 * Creates a customer by taking in user input

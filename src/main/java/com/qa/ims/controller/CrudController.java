@@ -10,7 +10,7 @@ public interface CrudController<T> {
 
 	List<T> readAll();
 	
-	T find();
+	//T find();
 
 	T create();
 

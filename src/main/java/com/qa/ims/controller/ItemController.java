@@ -41,18 +41,18 @@ public class ItemController implements CrudController<Item> {
 	/**
 	 * Finds an Item by taking in user input
 	 */
-	@Override
-	public Item find() {
-		LOGGER.info("Please enter item name");
-		String itemName = utils.getString();
-		LOGGER.info("Please enter the category of the item");
-		String itemCategory = utils.getString();
-		LOGGER.info("Please enter price");
-		double price = utils.getDouble();
-		Item item = itemDAO.create(new Item(itemName, itemCategory, price));
-		LOGGER.info("Item created\nItem: " + itemName + " Category: " + itemCategory + " Price: " + price);
-		return item;
-	}
+//	@Override
+//	public Item find() {
+//		LOGGER.info("Please enter item name");
+//		String itemName = utils.getString();
+//		LOGGER.info("Please enter the category of the item");
+//		String itemCategory = utils.getString();
+//		LOGGER.info("Please enter price");
+//		double price = utils.getDouble();
+//		Item item = itemDAO.create(new Item(itemName, itemCategory, price));
+//		LOGGER.info("Item created\nItem: " + itemName + " Category: " + itemCategory + " Price: " + price);
+//		return item;
+//	}
 
 	/**
 	 * Creates an Item by taking in user input

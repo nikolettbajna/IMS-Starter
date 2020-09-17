@@ -7,6 +7,8 @@ import com.qa.ims.controller.Action;
 import com.qa.ims.controller.CrudController;
 import com.qa.ims.controller.CustomerController;
 import com.qa.ims.controller.ItemController;
+import com.qa.ims.controller.OrderController;
+import com.qa.ims.persistence.dao.OrderDAO;
 import com.qa.ims.persistence.dao.CustomerDAO;
 import com.qa.ims.persistence.dao.ItemDAO;
 import com.qa.ims.persistence.domain.Domain;
@@ -19,6 +21,7 @@ public class IMS {
 
 	private final CustomerController customers;
 	private final ItemController items;
+	private final OrderController orders;
 	private final Utils utils;
 
 	public IMS() {
@@ -27,6 +30,8 @@ public class IMS {
 		this.customers = new CustomerController(custDAO, utils);
 		final ItemDAO itemDAO = new ItemDAO();
 		this.items = new ItemController(itemDAO, utils);
+		final OrderDAO orderDAO = new OrderDAO();
+		this.orders = new OrderController(orderDAO, utils);
 	}
 
 	public void imsSystem() {
@@ -59,7 +64,7 @@ public class IMS {
 				active = this.items;
 				break;
 			case ORDER:
-				active = null;
+				active = this.orders;
 				break;
 			case STOP:
 				return;
@@ -74,9 +79,7 @@ public class IMS {
 
 			if (action == Action.RETURN) {
 				changeDomain = true;
-			}else if (action == Action.BACK) {
-				doAction(active, action);
-			} else {
+			}else {
 				doAction(active, action);
 			}
 		} while (!changeDomain);
@@ -105,38 +108,38 @@ public class IMS {
 		}
 	}
 	
-	public void findAction(CrudController<?> crudController, Action action) {
-		boolean changeAction = false;
-		do {
-
-			CrudController<?> active = null;
-			switch(action) {
-			case BYNAME:
-				System.out.println("By name");
-				break;
-			case BYID:
-				System.out.println("By id");
-				break;
-			case LAST:
-				System.out.println("last");
-				break;
-			case BACK:
-				break;
-			default:
-				break;
-			}
-
-			LOGGER.info("What would you like to do with " + action.name().toLowerCase() + ":");
-
-			Action.printActions();
-			Action a = Action.getAction(utils);
-
-			if (a == Action.BACK) {
-				changeAction = true;
-			} else {
-				doAction(active, a);
-			}
-		} while (!changeAction);
-	}
+//	public void findAction(CrudController<?> crudController, Action action) {
+//		boolean changeAction = false;
+//		do {
+//
+//			CrudController<?> active = null;
+//			switch(action) {
+//			case BYNAME:
+//				System.out.println("By name");
+//				break;
+//			case BYID:
+//				System.out.println("By id");
+//				break;
+//			case LAST:
+//				System.out.println("last");
+//				break;
+//			case BACK:
+//				break;
+//			default:
+//				break;
+//			}
+//
+//			LOGGER.info("What would you like to do with " + action.name().toLowerCase() + ":");
+//
+//			Action.printActions();
+//			Action a = Action.getAction(utils);
+//
+//			if (a == Action.BACK) {
+//				changeAction = true;
+//			} else {
+//				doAction(active, a);
+//			}
+//		} while (!changeAction);
+//	}
 
 }

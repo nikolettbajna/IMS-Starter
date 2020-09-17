@@ -1,15 +1,26 @@
 package com.qa.ims.persistence.domain;
+import com.qa.ims.persistence.domain.Customer;
+import com.qa.ims.persistence.dao.CustomerDAO;
 
 public class Order {
-
-	java.util.Date dt = new java.util.Date();
-
-	java.text.SimpleDateFormat sdf = 
-	     new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-	//String currentTime = sdf.format(dt);
 	private Long id, custID;
-	private String dateTime;
+	private String dateTime, firstName, surname, email;
+	
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Order(Long custID) {
+		this.setCustID(custID);
+	}
 
 	public Order(Long custID, String dateTime) {
 		this.setCustID(custID);
@@ -20,6 +31,15 @@ public class Order {
 		this.setId(id);
 		this.setCustID(custID);
 		this.setDateTime(dateTime);
+	}
+	
+	public Order(Long id, Long custID, String firstName, String surname, String email, String dateTime) {
+		this.setId(id);
+		this.setCustID(custID);
+		this.setDateTime(dateTime);
+		this.setFirstName(firstName);
+		this.setSurname(surname);
+		this.setEmail(email);
 	}
 
 	public Long getId() {
@@ -45,11 +65,18 @@ public class Order {
 	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
 	}
+	
+	
 
 	@Override
 	public String toString() {
-		return "Order ID: " + id + ", Customer ID:" + custID + ", Order date: " + dateTime;
+		return "Order ID: " + id + ", Customer ID:" + custID + ", Customer name:" + firstName + " " + surname + ", Email: " + email + ", Order date: " + dateTime;
 	}
+
+//	@Override
+//	public String toString() {
+//		return "Order [id=" + id + ", custID=" + custID + ", dateTime=" + dateTime + ", customer=" + customer + "]";
+//	}
 
 	@Override
 	public int hashCode() {
