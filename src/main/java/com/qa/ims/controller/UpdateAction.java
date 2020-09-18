@@ -10,18 +10,16 @@ import com.qa.ims.utils.Utils;
  * function to apply to an entity.
  *
  */
-public enum Action {
-	CREATE("To save a new entity into the database"), READ("To read all entities from the database"),
-	//FIND("To find an entity from the database"), BACK("To return to action selection"),
-	//BYNAME("To find an entity by name"), BYID("To find an entity by id"), LAST("To find the last entity"),
-	UPDATE("To change an entity already in the database"), DELETE("To remove an entity from the database"),
-	RETURN("To return to domain selection");
+public enum UpdateAction {
+	ADD("To add a new item to an order"), VIEW("To view all the items in the order"),
+	CHANGE("To change an item already in the order"), REMOVE("To remove an item from the order"), SUM("To calculate the full price of the order"),
+	BACK("To return to domain selection");
 
 	public static final Logger LOGGER = LogManager.getLogger();
 
 	private String description;
 
-	Action(String description) {
+	UpdateAction(String description) {
 		this.description = description;
 	}
 
@@ -36,7 +34,7 @@ public enum Action {
 	 * Prints out all possible actions
 	 */
 	public static void printActions() {
-		for (Action action : Action.values()) {
+		for (UpdateAction action : UpdateAction.values()) {
 			LOGGER.info(action.getDescription());
 		}
 	}
@@ -47,11 +45,11 @@ public enum Action {
 	 * 
 	 * @return Action type
 	 */
-	public static Action getAction(Utils utils) {
-		Action action = null;
+	public static UpdateAction getAction(Utils utils) {
+		UpdateAction action = null;
 		do {
 			try {
-				action = Action.valueOf(utils.getString().toUpperCase());
+				action = UpdateAction.valueOf(utils.getString().toUpperCase());
 			} catch (IllegalArgumentException e) {
 				LOGGER.error("Invalid selection please try again");
 			}
