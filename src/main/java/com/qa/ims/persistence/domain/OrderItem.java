@@ -10,48 +10,59 @@ public class OrderItem {
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public Long getItemID() {
 		return itemID;
 	}
+
 	public void setItemID(Long itemID) {
 		this.itemID = itemID;
 	}
+
 	public Long getOrderID() {
 		return orderID;
 	}
+
 	public void setOrderID(Long orderID) {
 		this.orderID = orderID;
 	}
+
 	public String getItemName() {
 		return itemName;
 	}
+
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
+
 	public String getItemCategory() {
 		return itemCategory;
 	}
+
 	public void setItemCategory(String itemCategory) {
 		this.itemCategory = itemCategory;
 	}
+
 	public double getPrice() {
 		return price;
 	}
+
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
+
 	public double getTotalPrice() {
 		return totalPrice;
 	}
-	
+
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
-	
+
 	public OrderItem(Long orderID) {
 		this.setOrderID(orderID);
 	}
@@ -96,6 +107,8 @@ public class OrderItem {
 		long temp;
 		temp = Double.doubleToLongBits(price);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(totalPrice);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
 	@Override
@@ -133,6 +146,8 @@ public class OrderItem {
 		} else if (!orderID.equals(other.orderID))
 			return false;
 		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
+			return false;
+		if (Double.doubleToLongBits(totalPrice) != Double.doubleToLongBits(other.totalPrice))
 			return false;
 		return true;
 	}

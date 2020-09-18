@@ -61,11 +61,12 @@ public class Item {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		Double prc = new Double(price);
-		result = prime * result + ((itemName == null) ? 0 : itemName.hashCode());
-		result = prime * result + ((itemCategory == null) ? 0 : itemCategory.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((prc == null) ? 0 : prc.hashCode());
+		result = prime * result + ((itemCategory == null) ? 0 : itemCategory.hashCode());
+		result = prime * result + ((itemName == null) ? 0 : itemName.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(price);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
 
@@ -78,27 +79,22 @@ public class Item {
 		if (getClass() != obj.getClass())
 			return false;
 		Item other = (Item) obj;
-		if (getItemName() == null) {
-			if (other.getItemName() != null)
-				return false;
-		} else if (!getItemName().equals(other.getItemName()))
-			return false;
-		if (getCategory() == null) {
-			if (other.getCategory() != null)
-				return false;
-		} else if (!getCategory().equals(other.getCategory()))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		String op =String.valueOf(other.price);
-		String p =String.valueOf(price);
-		if (p == null) {
-			if (op != null)
+		if (itemCategory == null) {
+			if (other.itemCategory != null)
 				return false;
-		} else if (!p.equals(op))
+		} else if (!itemCategory.equals(other.itemCategory))
+			return false;
+		if (itemName == null) {
+			if (other.itemName != null)
+				return false;
+		} else if (!itemName.equals(other.itemName))
+			return false;
+		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
 			return false;
 		return true;
 	}

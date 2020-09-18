@@ -61,10 +61,10 @@ public class Customer {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		return result;
 	}
 
@@ -77,10 +77,15 @@ public class Customer {
 		if (getClass() != obj.getClass())
 			return false;
 		Customer other = (Customer) obj;
-		if (getFirstName() == null) {
-			if (other.getFirstName() != null)
+		if (email == null) {
+			if (other.email != null)
 				return false;
-		} else if (!getFirstName().equals(other.getFirstName()))
+		} else if (!email.equals(other.email))
+			return false;
+		if (firstName == null) {
+			if (other.firstName != null)
+				return false;
+		} else if (!firstName.equals(other.firstName))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -91,11 +96,6 @@ public class Customer {
 			if (other.surname != null)
 				return false;
 		} else if (!surname.equals(other.surname))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
 			return false;
 		return true;
 	}

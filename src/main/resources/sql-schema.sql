@@ -1,6 +1,10 @@
 drop schema ims;
 CREATE SCHEMA IF NOT EXISTS `ims`;
 USE `ims` ;
+DROP TABLE IF EXISTS `ims`.`orderitem`;
+DROP TABLE IF EXISTS `ims`.`orders`;
+DROP TABLE IF EXISTS `ims`.`customers`;
+DROP TABLE IF EXISTS `ims`.`items`;
 CREATE TABLE IF NOT EXISTS `ims`.`customers` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `first_name` VARCHAR(40) NULL DEFAULT NULL,
@@ -18,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `ims`.`items` (
 CREATE TABLE IF NOT EXISTS `ims`.`orders` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `customerID` INT(11) NOT NULL,
-    `dateTime` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    `dateTime` TIMESTAMP NULL DEFAULT NOW(),
     PRIMARY KEY (`id`),
     FOREIGN KEY (customerID) REFERENCES customers(id) ON DELETE CASCADE
 );

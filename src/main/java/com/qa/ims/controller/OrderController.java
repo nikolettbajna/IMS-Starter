@@ -37,18 +37,6 @@ public class OrderController implements CrudController<Order> {
 		}
 		return Orders;
 	}
-	
-	/**
-	 * Finds an Order by taking in user input
-	 */
-//	@Override
-//	public Order find() {
-//		LOGGER.info("Please enter customer id");
-//		Long custID = utils.getLong();
-//		Order order = OrderDAO.create(new Order(custID));
-//		LOGGER.info("Order created");
-//		return order;
-//	}
 
 	/**
 	 * Creates an Order by taking in user input

@@ -7,8 +7,6 @@ import java.util.List;
 public interface Dao<T> {
 
 	List<T> readAll();
-	
-//	T find(T t);
 
 	T create(T t);
 

@@ -47,19 +47,6 @@ public class ItemDAO implements Dao<Item> {
 		}
 		return new ArrayList<>();
 	}
-	
-	public Item find(Item item) {
-		try (Connection connection = DBUtils.getInstance().getConnection();
-				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM items ORDER BY id DESC LIMIT 1");) {
-			resultSet.next();
-			return modelFromResultSet(resultSet);
-		} catch (Exception e) {
-			LOGGER.debug(e);
-			LOGGER.error(e.getMessage());
-		}
-		return null;
-	}
 
 	public Item readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();

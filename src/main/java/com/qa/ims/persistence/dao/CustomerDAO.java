@@ -60,19 +60,6 @@ public class CustomerDAO implements Dao<Customer> {
 		}
 		return null;
 	}
-	
-	public Customer find(Customer customer) {
-		try (Connection connection = DBUtils.getInstance().getConnection();
-				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM customers ORDER BY id DESC LIMIT 1");) {
-			resultSet.next();
-			return modelFromResultSet(resultSet);
-		} catch (Exception e) {
-			LOGGER.debug(e);
-			LOGGER.error(e.getMessage());
-		}
-		return null;
-	}
 
 	/**
 	 * Creates a customer in the database
