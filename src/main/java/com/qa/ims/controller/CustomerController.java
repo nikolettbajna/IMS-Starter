@@ -66,7 +66,7 @@ public class CustomerController implements CrudController<Customer> {
 		LOGGER.info("Please enter the email address");
 		String email = utils.getString();
 		Customer customer = customerDAO.create(new Customer(firstName, surname, email));
-		LOGGER.info("Customer Created\nName: " + firstName + " " + surname + " E-mail: " + email);
+		LOGGER.info("Customer Created " + customerDAO.readLatest());
 		return customer;
 	}
 

@@ -11,7 +11,7 @@ INSERT INTO `ims`.`orders` (`customerID`) VALUES (1),
 (3),
 (1);
 
-INSERT INTO `ims`.`orderitem` (`itemID`, `oredID`) VALUES (1, 1),
+INSERT INTO `ims`.`orderitem` (`itemID`, `orderID`) VALUES (1, 1),
 (1, 1),
 (2, 1),
 (3, 2);

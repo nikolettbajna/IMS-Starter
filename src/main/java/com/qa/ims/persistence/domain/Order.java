@@ -1,6 +1,4 @@
 package com.qa.ims.persistence.domain;
-import com.qa.ims.persistence.domain.Customer;
-import com.qa.ims.persistence.dao.CustomerDAO;
 
 public class Order {
 	private Long id, custID;
@@ -66,17 +64,10 @@ public class Order {
 		this.dateTime = dateTime;
 	}
 	
-	
-
 	@Override
 	public String toString() {
 		return "Order ID: " + id + ", Customer ID:" + custID + ", Customer name:" + firstName + " " + surname + ", Email: " + email + ", Order date: " + dateTime;
 	}
-
-//	@Override
-//	public String toString() {
-//		return "Order [id=" + id + ", custID=" + custID + ", dateTime=" + dateTime + ", customer=" + customer + "]";
-//	}
 
 	@Override
 	public int hashCode() {

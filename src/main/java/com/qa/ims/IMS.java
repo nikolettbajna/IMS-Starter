@@ -4,11 +4,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.qa.ims.controller.Action;
+import com.qa.ims.controller.UpdateAction;
+import com.qa.ims.controller.UpdateItemController;
+import com.qa.ims.controller.UpdateController;
 import com.qa.ims.controller.CrudController;
 import com.qa.ims.controller.CustomerController;
 import com.qa.ims.controller.ItemController;
 import com.qa.ims.controller.OrderController;
 import com.qa.ims.persistence.dao.OrderDAO;
+import com.qa.ims.persistence.dao.UpdateOrderDAO;
 import com.qa.ims.persistence.dao.CustomerDAO;
 import com.qa.ims.persistence.dao.ItemDAO;
 import com.qa.ims.persistence.domain.Domain;
@@ -22,6 +26,7 @@ public class IMS {
 	private final CustomerController customers;
 	private final ItemController items;
 	private final OrderController orders;
+	private final UpdateItemController orderitems;
 	private final Utils utils;
 
 	public IMS() {
@@ -32,6 +37,8 @@ public class IMS {
 		this.items = new ItemController(itemDAO, utils);
 		final OrderDAO orderDAO = new OrderDAO();
 		this.orders = new OrderController(orderDAO, utils);
+		final UpdateOrderDAO updateDAO = new UpdateOrderDAO();
+		this.orderitems = new UpdateItemController(updateDAO, utils);
 	}
 
 	public void imsSystem() {
@@ -79,29 +86,65 @@ public class IMS {
 
 			if (action == Action.RETURN) {
 				changeDomain = true;
-			}else {
-				doAction(active, action);
+			}else{
+				doAction(active, action, domain.name().toLowerCase());
 			}
 		} while (!changeDomain);
 	}
 
-	public void doAction(CrudController<?> crudController, Action action) {
+	public void doAction(CrudController<?> crudController, Action action, String domain) {
+		boolean changeAction = false;
+		do {
+			switch (action) {
+			case CREATE:
+				crudController.create();
+				break;
+			case READ:
+				crudController.readAll();
+				break;
+	//		case FIND:		
+	//			break;
+			case UPDATE:
+				if (domain.equals("order")) {
+					LOGGER.info("Which action would you like to perform:");
+					UpdateAction.printActions();
+					UpdateAction updateAction = UpdateAction.getAction(utils);
+					UpdateController<?> uc = this.orderitems;
+					if (updateAction == UpdateAction.BACK) {
+						changeAction = true;
+					}else{
+						doUpdateAction(uc, updateAction);
+					}
+				}else {
+					crudController.update();
+				}
+				break;
+			case DELETE:
+				crudController.delete();
+				break;
+			case RETURN:
+				break;
+			default:
+				break;
+			}
+		}while(!changeAction);
+	}
+	
+	public void doUpdateAction(UpdateController<?> updateController, UpdateAction action) {
 		switch (action) {
-		case CREATE:
-			crudController.create();
+		case ADD:
+			updateController.add();
 			break;
-		case READ:
-			crudController.readAll();
+		case VIEW:
+			updateController.view();
 			break;
-//		case FIND:		
-//			break;
-		case UPDATE:
-			crudController.update();
+		case REMOVE:
+			updateController.remove();
 			break;
-		case DELETE:
-			crudController.delete();
+		case SUM:
+			updateController.sum();
 			break;
-		case RETURN:
+		case BACK:
 			break;
 		default:
 			break;
